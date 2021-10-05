@@ -30,3 +30,12 @@
 ;; 开启全局 Company 补全
 (global-company-mode 1)
 
+;; 设置 windows 默认终端
+(setq explicit-shell-file-name "c:/Windows/System32/bash.exe")
+(setq shell-file-name "bash")
+(setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+(setenv "SHELL" shell-file-name)
+(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+;; 将 shell 绑定到 F1
+(global-set-key (kbd "<f1>") 'shell)
+
