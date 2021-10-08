@@ -23,19 +23,62 @@
 ;; 绑定快捷键
 (global-set-key (kbd "<f3>") 'reload-init-file)
 
-;; 更改 elpa 镜像地址
-(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			 ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-
 ;; 开启全局 Company 补全
 (global-company-mode 1)
 
-;; 设置 windows 默认终端
-(setq explicit-shell-file-name "c:/Windows/System32/bash.exe")
-(setq shell-file-name "bash")
-(setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
-(setenv "SHELL" shell-file-name)
-(add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
-;; 将 shell 绑定到 F1
-(global-set-key (kbd "<f1>") 'shell)
+;; 关闭自动生成备份文件
+(setq make-backup-files nil)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(company)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; 当 emacs 版本大于 24 时, 更改 elpa 镜像地址
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+
+(defvar my/packages '(
+		      ;; Auto-completion
+		      company
+		      ;; 搜索功能增强
+		      swiper
+		      ;; 管理成对的符号
+		      smartparens
+		      ;; --- Major Mode ---
+		      ;; golang support
+		      go-mode
+		      ;; monokai 主题
+		      monokai-theme
+		      ;; 贪婪删除空格
+		      hungry-delete
+		      ) "Default package")
+(setq package-selected-packages my/packages)
+
+(require 'cl)
+(defun my/packages-installed-p ()
+  (loop for pkg in my/packages
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return t)))
+
+(unless (my/packages-installed-p)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg my/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
+
+;; 加载主题
+(load-theme 'monokai t)
 
