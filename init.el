@@ -14,3 +14,6 @@
 ;; Keybinding Management
 (require 'init-keybindings)
 
+;; Editor Management
+(require 'init-editor)
+

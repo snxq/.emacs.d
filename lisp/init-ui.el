@@ -9,5 +9,8 @@
 ;; show line number
 (global-linum-mode 1)
 
+;; load theme
+(load-theme 'monokai t)
+
 (provide 'init-ui)
 
