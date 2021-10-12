@@ -31,7 +31,7 @@
 	when (not (package-installed-p pkg)) do (return nil)
 	finally (return t)))
 
-(unless (snxq/packages-installed-p)
+(unless (snxq/package-installed-p)
   (message "%s" "Refreshing package database...")
   (package-refresh-contents)
   (dolist (pkg snxq/packages)
