@@ -1,7 +1,6 @@
 ;; emacs 配置根文件
 
 ;; 将 lisp 文件夹放在加载目录中
-(package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; Package Management
