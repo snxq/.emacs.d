@@ -8,9 +8,10 @@
 ;; modify package source
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
-  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+			   ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+			   ("melpa-stable" . "https://stable.melpa.org/packages/")))
+  (package-initialize))
 
 ;; import cl
 (require 'cl)
