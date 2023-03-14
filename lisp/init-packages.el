@@ -28,9 +28,9 @@
 			) "Default Packages")
 
 (defun snxq/package-installed-p ()
-  (loop for pkg in snxq/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
+  (cl-loop for pkg in snxq/packages
+	when (not (package-installed-p pkg)) do (cl-return nil)
+	finally (cl-return t)))
 
 (unless (snxq/package-installed-p)
   (message "%s" "Refreshing package database...")
