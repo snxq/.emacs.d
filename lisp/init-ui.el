@@ -8,7 +8,7 @@
       (scroll-bar-mode -1)))
 
 ;; show line number
-(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 
 ;; load theme
 (load-theme 'monokai t)
